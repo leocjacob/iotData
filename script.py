@@ -17,11 +17,10 @@ client = InfluxDBClient(url=url, token=token, org=org)
 
 query_api = client.query_api()
 
-query = """from(bucket: "{bucket}")
-  |> range(start: -55h)
-  |> filter(fn: (r) => r["_measurement"] == "HeatIndex" or r["_measurement"] == "Humidity" or r["_measurement"] == "SoilMoisture" or r["_measurement"] == "Temperature")
-  |> map(fn: (r) => ({ r with _time: r._time }))
-  """
+query = 'from(bucket: "' + bucket + '")' + \
+        '  |> range(start: -55h)' + \
+        '  |> filter(fn: (r) => r["_measurement"] == "HeatIndex" or r["_measurement"] == "Humidity" or r["_measurement"] == "SoilMoisture" or r["_measurement"] == "Temperature")' + \
+        '  |> map(fn: (r) => ({ r with _time: r._time }))'
 
 tables = query_api.query(query, org="leocj.ca")
 
