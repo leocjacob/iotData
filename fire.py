@@ -8,16 +8,19 @@ from firebase_admin import firestore
 sa_json_file = os.environ.get("SA_JSON_FILE")
 tag_data = os.environ.get("TAG_DATA")
 
+try:
+    # Use a service account.
+    cred = credentials.Certificate(sa_json_file)
 
+    app = firebase_admin.initialize_app(cred)
 
-# Use a service account.
-cred = credentials.Certificate(sa_json_file)
+    db = firestore.client()
 
-app = firebase_admin.initialize_app(cred)
+    data = {"tag": tag_data}
 
-db = firestore.client()
+    # Add a new doc in collection 'tags' with ID 'data'
+    db.collection("tags").document("data").set(data)
 
-data = {"tag": tag_data}
-
-# Add a new doc in collection 'cities' with ID 'LA'
-db.collection("tags").document("data").set(data)
+    print("Updated Firestore")
+except Exception as e:
+    print(f"Failed to update Firestore: {str(e)}")
