@@ -5,7 +5,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 
 # Specify the path to the service account JSON file
-sa_json_file = os.environ.get("SA_JSON_FILE")
+sa_json_file = os.environ.get("FIREBASE_CONFIG")
 tag_data = os.environ.get("TAG_DATA")
 
 try:
