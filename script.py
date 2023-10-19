@@ -52,6 +52,16 @@ for table in tables:
             output_data["HeatIndex"].append(data_point)
         elif measurement == "SoilMoisture":
             output_data["SoilMoisture"].append(data_point)
+            
+# Read the ImageData.json file
+with open("ImageData.json", "r") as image_data_file:
+    image_data = json.load(image_data_file)
+
+
+# Append the image data to the output_data dictionary
+for image_record in image_data:
+    output_data["Images"].append(image_record)
+
 
 # Convert the dictionary to a JSON string
 json_output = json.dumps(output_data, indent=4)
