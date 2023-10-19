@@ -33,7 +33,8 @@ output_data = {
     "Temperature": [],
     "Humidity": [],
     "HeatIndex": [],
-    "SoilMoisture": []
+    "SoilMoisture": [],
+    "Images": []
 }
 
 # Iterate through the records and organize the data
